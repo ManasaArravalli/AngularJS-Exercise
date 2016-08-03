@@ -1,0 +1,47 @@
+<!-- form fields -->
+<div>
+   <form novalidate class="simple-form">
+      Account Number: <input type="text" ng-model="user.accountNumber" />
+      Account Description: <input type="text" ng-model="user.accountDescription" />
+      Balance: <input type="number" ng-model="user.balance" /><br />
+      Account Structure: 
+      <select multiple="" ng-model="user.accountStructure">
+         <option ng-repeat="accStructure in parentAccountStructure">{{accStructure.accountDescription}}</option>
+      </select>
+      <br/>
+      Account Types: 
+      <select multiple>
+         <option ng-repeat="accountType in accountTypes">{{accountType.accountDescription}}</option>
+      </select>
+      <br/>
+      <input type="submit"  ng-click="addAccountStructure(user)" value="Submit" />
+   </form><br/>
+   <!-- Add Account Type Button -->
+   <a role="button" type="button" href="#accountType"  class="btn btn-success acctypebtn">Add Account Type</a> <br/>
+   <!--Display the entered form fields in the tabular structure-->
+   <div>
+      <table class="table table-striped">
+         <thead>
+            <tr>
+               <th>Account Number</th>
+               <th>Account Des</th>
+               <th>Account balance</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody ui:sortable ng:model="accountStructurList">
+            <tr ng-repeat="acc in accountStructurList track by $index">
+               <td>{{acc.accountNumber}}</td>
+               <td>{{acc.accountDescription}}</td>
+               <td>{{acc.balance}}</td>
+               <td><a ng-click="deleteAccountStructure(acc)">X </a></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td></td>
+               <td>{{total}}</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>
